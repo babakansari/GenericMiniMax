@@ -3,6 +3,8 @@
 // https://thecodingtrain.com/CodingChallenges/154-tic-tac-toe-minimax.html
 // https://youtu.be/I64-UTORVfU
 // https://editor.p5js.org/codingtrain/sketches/0zyUhZdJD
+// import {bestMove} from './minimax';
+// var bestMove = require('minimax');
 
 let board = [
     ['', '', ''],

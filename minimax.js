@@ -12,23 +12,28 @@ const players = {
 
 function bestMove() {
   // AI to make its turn
-  let bestScore = -Infinity;
   let move;
   let gamer = new transposer();
-  for (let i = 0; i < 3; i++) {
-    for (let j = 0; j < 3; j++) {
-      // Is the spot available?
-      if (board[i][j] == '') {
-        board[i][j] = ai;
-        let score = gamer.minimax(board, 0, players.X);
-        board[i][j] = '';
-        if (score > bestScore) {
-          bestScore = score;
-          move = { i, j };
-        }
+  gamer.onIterate = (board, player, onGetScore) => {
+      for (let i = 0; i < 3; i++) {
+          for (let j = 0; j < 3; j++) {
+              if (board[i][j] == '') {
+                  board[i][j] = (player == players.X) ? ai : human;
+                  onGetScore(i, j)
+                  board[i][j] = '';
+              }
+          }
       }
-    }
-  }
+  } 
+  let bestScore = -Infinity;
+  gamer.onIterate(board, players.X, (i, j) => {
+            let score = gamer.minimax(board, 0, players.X);
+            if (score > bestScore) {
+              bestScore = score;
+              move = { i, j };
+            }
+          });
+
   board[move.i][move.j] = ai;
   currentPlayer = human;
 }
