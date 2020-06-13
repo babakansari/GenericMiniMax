@@ -4,11 +4,11 @@ class transposer{
 
     }
 
-    onIterate = function(board, player, onGetScore){
+    onIterate = function(player, onGetScore){
         
     } 
   
-    minimax = function(board, player) {
+    minimax = function(player) {
         let result = checkWinner();
         if (result !== null) {
             return players[result];
@@ -16,16 +16,16 @@ class transposer{
 
         if (player === players.O) {
             let bestScore = -Infinity;
-            this.onIterate(board, players.X, ()=>{
-                let score = this.minimax(board, players.X);
+            this.onIterate(players.X, ()=>{
+                let score = this.minimax(players.X);
                 bestScore = max(bestScore, score);
                 return null;
             }); 
             return bestScore;
         } else {
             let bestScore = Infinity;
-            this.onIterate(board, players.O, ()=>{
-                let score = this.minimax(board, players.O);
+            this.onIterate(players.O, ()=>{
+                let score = this.minimax(players.O);
                 bestScore = min(bestScore, score);
                 return null;
             });

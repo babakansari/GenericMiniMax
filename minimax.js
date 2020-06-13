@@ -14,7 +14,7 @@ function bestMove() {
   // AI to make its turn
   let move;
   let gamer = new transposer();
-  gamer.onIterate = (board, player, onGetScore) => {
+  gamer.onIterate = (player, onGetScore) => {
       for (let i = 0; i < 3; i++) {
           for (let j = 0; j < 3; j++) {
               if (board[i][j] == '') {
@@ -26,7 +26,7 @@ function bestMove() {
       }
   } 
   let bestScore = -Infinity;
-  gamer.onIterate(board, players.X, (i, j) => {
+  gamer.onIterate(players.X, (i, j) => {
             let score = gamer.minimax(board, 0, players.X);
             if (score > bestScore) {
               bestScore = score;
