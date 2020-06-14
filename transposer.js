@@ -1,35 +1,52 @@
-class transposer{
+class Game{
 
     constructor(){
 
     }
 
-    onIterate = function(player, onGetScore){
+    onTrace = function(player, doBestMove){
         
     } 
-  
-    minimax = function(player) {
-        let result = checkWinner();
-        if (result !== null) {
-            return players[result];
+
+    play = function(player){
+        let move;
+        let bestScore = -Infinity;
+        this.onTrace(player, (position) => {
+                  let current = this._minimax(players.X);
+                  if (current.bestScore > bestScore) {
+                    bestScore = current.bestScore;
+                    move = position;
+                  }
+                });
+        return move;
+    }
+
+    _minimax = function(player) {
+        let winner = checkWinner();
+        if (winner !== null) {
+            return { bestScore: players[winner], position: {}  };
         }
 
         if (player === players.O) {
-            let bestScore = -Infinity;
-            this.onIterate(players.X, ()=>{
-                let score = this.minimax(players.X);
-                bestScore = max(bestScore, score);
-                return null;
+            let current = { bestScore: -Infinity, position: {} };
+            this.onTrace(players.X, (position)=>{
+                let next = this._minimax(players.X);
+                if(current.bestScore < next.bestScore){
+                    current.bestScore = next.bestScore;
+                    current.position = position;
+                }
             }); 
-            return bestScore;
+            return current;
         } else {
-            let bestScore = Infinity;
-            this.onIterate(players.O, ()=>{
-                let score = this.minimax(players.O);
-                bestScore = min(bestScore, score);
-                return null;
+            let current = { bestScore: Infinity, position: {} };
+            this.onTrace(players.O, (position)=>{
+                let next = this._minimax(players.O);
+                if(current.bestScore > next.bestScore){
+                    current.bestScore = next.bestScore;
+                    current.position = position;
+                }
             });
-            return bestScore;
+            return current;
         }
     } 
 }
