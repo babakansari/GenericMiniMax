@@ -9,6 +9,7 @@ class TicTacToe {
 
   static ai = 'X';
   static human = 'O';
+  static tie = 'tie';
 
   constructor(board){
     this._board = board;
@@ -55,11 +56,14 @@ class TicTacToe {
         }
       }
     }
-  
+
     if (winner == null && openSpots == 0) {
-      return 'tie';
+      return Game.players.tie;
     } else {
-      return winner;
+      if(winner == null) {
+        return null;
+      }
+      return winner==TicTacToe.ai ? Game.players.A : Game.players.B;
     }
   }
 
@@ -67,7 +71,7 @@ class TicTacToe {
     for (let i = 0; i < 3; i++) {
       for (let j = 0; j < 3; j++) {
           if (this._board[i][j] == '') {
-              this._board[i][j] = (player == Game.players.X) ? TicTacToe.ai : TicTacToe.human;
+              this._board[i][j] = (player == Game.players.A) ? TicTacToe.ai : TicTacToe.human;
               evaluate( {i, j} );
               this._board[i][j] = '';
             }
@@ -76,10 +80,19 @@ class TicTacToe {
   }
 
   bestMove = function(turn) {
-    let position = this._game.play( turn==TicTacToe.ai ? Game.players.X : Game.players.O);
+    let position = this._game.play( turn==TicTacToe.ai ? Game.players.A : Game.players.B);
     this._board[position.i][position.j] = turn;
     let winner = this._checkWinner();
-    return winner;
+    if(winner == null){
+      return null;
+    }
+    if(winner == Game.players.A){
+      return TicTacToe.ai;
+    }
+    if(winner == Game.players.B){
+      return TicTacToe.human;
+    }
+    return TicTacToe.tie;
   }
 
 }

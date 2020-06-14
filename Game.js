@@ -2,8 +2,8 @@
 class Game{
 
     static players = {
-        X: 10,
-        O: -10,
+        A: 10,
+        B: -10,
         tie: 0
       };
 
@@ -35,13 +35,13 @@ class Game{
     _minimax = function(player) {
         let winner = this.getWinner();
         if (winner !== null) {
-            return { bestScore: Game.players[winner], position: {}  };
+            return { bestScore: winner, position: {}  };
         }
 
-        if (player === Game.players.O) {
+        if (player === Game.players.B) {
             let current = { bestScore: -Infinity, position: {} };
-            this.onTrace(Game.players.X, (position)=>{
-                let next = this._minimax(Game.players.X);
+            this.onTrace(Game.players.A, (position)=>{
+                let next = this._minimax(Game.players.A);
                 if(current.bestScore < next.bestScore){
                     current.bestScore = next.bestScore;
                     current.position = position;
@@ -50,8 +50,8 @@ class Game{
             return current;
         } else {
             let current = { bestScore: Infinity, position: {} };
-            this.onTrace(Game.players.O, (position)=>{
-                let next = this._minimax(Game.players.O);
+            this.onTrace(Game.players.B, (position)=>{
+                let next = this._minimax(Game.players.B);
                 if(current.bestScore > next.bestScore){
                     current.bestScore = next.bestScore;
                     current.position = position;
