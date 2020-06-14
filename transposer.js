@@ -4,9 +4,9 @@ class Game{
 
     }
 
-    onTrace = function(player, doBestMove){
-        
-    } 
+    onTrace = function(player, doBestMove){} 
+
+    onCheckWinner = function(){}
 
     play = function(player){
         let move;
@@ -22,7 +22,7 @@ class Game{
     }
 
     _minimax = function(player) {
-        let winner = checkWinner();
+        let winner = this.onCheckWinner();
         if (winner !== null) {
             return { bestScore: players[winner], position: {}  };
         }
