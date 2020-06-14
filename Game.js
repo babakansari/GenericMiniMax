@@ -1,18 +1,29 @@
+
 class Game{
+
+    static players = {
+        X: 10,
+        O: -10,
+        tie: 0
+      };
 
     constructor(){
 
     }
 
-    onTrace = function(player, doBestMove){} 
+    onTrace = function(player, onMove){
+        throw 'onTrace method not implemented!';
+    } 
 
-    onCheckWinner = function(){}
+    getWinner = function(){
+        throw 'onTrace method not implemented!';
+    }
 
     play = function(player){
         let move;
         let bestScore = -Infinity;
         this.onTrace(player, (position) => {
-                  let current = this._minimax(players.X);
+                  let current = this._minimax(player);
                   if (current.bestScore > bestScore) {
                     bestScore = current.bestScore;
                     move = position;
@@ -22,15 +33,15 @@ class Game{
     }
 
     _minimax = function(player) {
-        let winner = this.onCheckWinner();
+        let winner = this.getWinner();
         if (winner !== null) {
-            return { bestScore: players[winner], position: {}  };
+            return { bestScore: Game.players[winner], position: {}  };
         }
 
-        if (player === players.O) {
+        if (player === Game.players.O) {
             let current = { bestScore: -Infinity, position: {} };
-            this.onTrace(players.X, (position)=>{
-                let next = this._minimax(players.X);
+            this.onTrace(Game.players.X, (position)=>{
+                let next = this._minimax(Game.players.X);
                 if(current.bestScore < next.bestScore){
                     current.bestScore = next.bestScore;
                     current.position = position;
@@ -39,8 +50,8 @@ class Game{
             return current;
         } else {
             let current = { bestScore: Infinity, position: {} };
-            this.onTrace(players.O, (position)=>{
-                let next = this._minimax(players.O);
+            this.onTrace(Game.players.O, (position)=>{
+                let next = this._minimax(Game.players.O);
                 if(current.bestScore > next.bestScore){
                     current.bestScore = next.bestScore;
                     current.position = position;
