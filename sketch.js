@@ -15,37 +15,37 @@ let board = [
   let w; // = width / 3;
   let h; // = height / 3;
   
-  let ai = 'X';
-  let human = 'O';
-  let currentPlayer = human;
+  let ticTacToe  = new TicTacToe(board);
+
+  function _playTurn(turn){
+    let move = ticTacToe.bestMove(turn);
+    board[move.i][move.j] = turn;
+  }
   
   function setup() {
     createCanvas(400, 400);
     w = width / 3;
     h = height / 3;
-    bestMove();
-  }
-  
-  function equals3(a, b, c) {
-    return a == b && b == c && a != '';
+    _playTurn(TicTacToe.ai);
+    currentPlayer = TicTacToe.human;
   }
   
   function mousePressed() {
-    if (currentPlayer == human) {
+    if (currentPlayer == TicTacToe.human) {
       // Human make turn
       let i = floor(mouseX / w);
       let j = floor(mouseY / h);
       // If valid turn
       if (board[i][j] == '') {
-        board[i][j] = human;
-        currentPlayer = ai;
-        bestMove();
+        board[i][j] = TicTacToe.human;
+        _playTurn(TicTacToe.ai);
+        currentPlayer = TicTacToe.human;
       }
     }
   }
   
   function draw() {
-    background(255);
+    background(215);
     strokeWeight(4);
   
     line(w, 0, w, height);
@@ -60,17 +60,19 @@ let board = [
         let spot = board[i][j];
         textSize(32);
         let r = w / 4;
-        if (spot == human) {
+        if (spot == TicTacToe.human) {
           noFill();
           ellipse(x, y, r * 2);
-        } else if (spot == ai) {
+          continue;
+        }
+        if (spot == TicTacToe.ai) {
           line(x - r, y - r, x + r, y + r);
           line(x + r, y - r, x - r, y + r);
         }
       }
     }
   
-    let result = checkWinner();
+    let result = ticTacToe.checkWinner();
     if (result != null) {
       noLoop();
       let resultP = createP('');
@@ -82,3 +84,4 @@ let board = [
       }
     }
   }
+  

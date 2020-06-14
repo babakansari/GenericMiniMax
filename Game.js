@@ -11,7 +11,7 @@ class Game{
 
     }
 
-    onTrace = function(player, onMove){
+    onTrace = function(player, evaluate){
         throw 'onTrace method not implemented!';
     } 
 
