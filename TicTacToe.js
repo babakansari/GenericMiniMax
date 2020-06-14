@@ -59,12 +59,13 @@ class TicTacToe {
 
     if (winner == null && openSpots == 0) {
       return Game.players.tie;
-    } else {
-      if(winner == null) {
-        return null;
-      }
-      return winner==TicTacToe.ai ? Game.players.A : Game.players.B;
     }
+    
+    if(winner == null) {
+      return null;
+    }
+    
+    return winner==TicTacToe.ai ? Game.players.A : Game.players.B;
   }
 
   _checkBoard = function(player, evaluate){
@@ -86,13 +87,11 @@ class TicTacToe {
     if(winner == null){
       return null;
     }
-    if(winner == Game.players.A){
-      return TicTacToe.ai;
+    if(winner ==  Game.players.tie){
+      return TicTacToe.tie;
     }
-    if(winner == Game.players.B){
-      return TicTacToe.human;
-    }
-    return TicTacToe.tie;
+
+    return winner == Game.players.A ? TicTacToe.ai : TicTacToe.human;    
   }
 
 }
