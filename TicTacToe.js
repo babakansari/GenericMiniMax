@@ -9,13 +9,15 @@ class TicTacToe {
 
   static ai = 'X';
   static human = 'O';
-  status = null;
 
   constructor(board){
     this._board = board;
+    this._game= new Game();
+    this._game.getWinner = () => this._checkWinner();
+    this._game.onTrace = (player, evaluate) => this._checkBoard(player, evaluate);
   }
 
-  checkWinner = function() {
+  _checkWinner = function() {
     
     function equals3(a, b, c) {
       return a == b && b == c && a != '';
@@ -74,11 +76,10 @@ class TicTacToe {
   }
 
   bestMove = function(turn) {
-    let game = new Game();
-    game.getWinner = () => this.checkWinner();
-    game.onTrace = (player, evaluate) => this._checkBoard(player, evaluate);
-  
-    return game.play( turn==TicTacToe.ai ? Game.players.X : Game.players.O);
+    let position = this._game.play( turn==TicTacToe.ai ? Game.players.X : Game.players.O);
+    this._board[position.i][position.j] = turn;
+    let winner = this._checkWinner();
+    return winner;
   }
 
 }

@@ -14,12 +14,12 @@ let board = [
   
   let w; // = width / 3;
   let h; // = height / 3;
+  let winner = null;
   
   let ticTacToe  = new TicTacToe(board);
 
   function _playTurn(turn){
-    let move = ticTacToe.bestMove(turn);
-    board[move.i][move.j] = turn;
+    winner = ticTacToe.bestMove(turn);
   }
   
   function setup() {
@@ -72,15 +72,14 @@ let board = [
       }
     }
   
-    let result = ticTacToe.checkWinner();
-    if (result != null) {
+    if (winner != null) {
       noLoop();
       let resultP = createP('');
       resultP.style('font-size', '32pt');
-      if (result == 'tie') {
+      if (winner == 'tie') {
         resultP.html('Tie!');
       } else {
-        resultP.html(`${result} wins!`);
+        resultP.html(`${winner} wins!`);
       }
     }
   }
