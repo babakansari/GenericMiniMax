@@ -12,11 +12,11 @@ class Game{
     }
 
     onTrace = function(player, evaluate){
-        throw 'onTrace method not implemented!';
+        throw 'onTrace method is not implemented!';
     } 
 
     getWinner = function(){
-        throw 'onTrace method not implemented!';
+        throw 'onTrace method is not implemented!';
     }
 
     play = function(player){

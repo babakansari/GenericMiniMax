@@ -80,7 +80,7 @@ class TicTacToe {
     }
   }
 
-  bestMove = function(turn) {
+  getTheBestMove = function(turn) {
     let position = this._game.play( turn==TicTacToe.ai ? Game.players.A : Game.players.B);
     this._board[position.i][position.j] = turn;
     let winner = this._checkWinner();
