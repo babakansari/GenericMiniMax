@@ -1,3 +1,5 @@
+// Generic Minimax Algorithm
+
 
 class Game{
 
