@@ -5,13 +5,14 @@
 // https://editor.p5js.org/codingtrain/sketches/0zyUhZdJD
 
 let board = [
-    ['', '', ''],
-    ['', '', ''],
-    ['', '', '']
+    ['', '', '', ''],
+    ['', '', '', ''],
+    ['', '', '', ''],
+    ['', '', '', '']
   ];
   
-  let w; // = width / 3;
-  let h; // = height / 3;
+  let w; // = width / 4;
+  let h; // = height / 4;
   let winner = null;
   
   let ticTacToe  = new TicTacToe(board);
@@ -22,8 +23,8 @@ let board = [
   
   function setup() {
     createCanvas(400, 400);
-    w = width / 3;
-    h = height / 3;
+    w = width / 4;
+    h = height / 4;
     _playTurn(TicTacToe.ai);
     currentPlayer = TicTacToe.human;
   }
@@ -48,11 +49,13 @@ let board = [
   
     line(w, 0, w, height);
     line(w * 2, 0, w * 2, height);
+    line(w * 3, 0, w * 3, height);
     line(0, h, width, h);
     line(0, h * 2, width, h * 2);
+    line(0, h * 3, width, h * 3);
   
-    for (let j = 0; j < 3; j++) {
-      for (let i = 0; i < 3; i++) {
+    for (let j = 0; j < 4; j++) {
+      for (let i = 0; i < 4; i++) {
         let x = w * i + w / 2;
         let y = h * j + h / 2;
         let spot = board[i][j];

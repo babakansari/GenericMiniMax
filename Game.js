@@ -32,16 +32,16 @@ class Game{
         return move;
     }
 
-    _minimax = function(player) {
+    _minimax = function(player, level = 0) {
         let winner = this.getWinner();
-        if (winner !== null) {
+        if (winner !== null || level ==1) {
             return { bestScore: winner, position: {}  };
         }
 
         if (player === Game.players.B) {
             let current = { bestScore: -Infinity, position: {} };
             this.onTrace(Game.players.A, (position)=>{
-                let next = this._minimax(Game.players.A);
+                let next = this._minimax(Game.players.A, level + 1);
                 if(current.bestScore < next.bestScore){
                     current.bestScore = next.bestScore;
                     current.position = position;
@@ -51,7 +51,7 @@ class Game{
         } else {
             let current = { bestScore: Infinity, position: {} };
             this.onTrace(Game.players.B, (position)=>{
-                let next = this._minimax(Game.players.B);
+                let next = this._minimax(Game.players.B, level + 1);
                 if(current.bestScore > next.bestScore){
                     current.bestScore = next.bestScore;
                     current.position = position;
