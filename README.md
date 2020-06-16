@@ -9,7 +9,8 @@ The `Game` class is used to create a "Tic Tac Toe" (`TicTacToe.js`) game as an e
 
 It is limited into two players at the moment but could be extened into multiple players.
 
-## Note: ## The Minimax depth search is limited into 2 levels to improve performance.s
+## Note: 
+The Minimax depth search is limited into 2 levels to improve performance.s
 
 Use the following site for experimenting with 4x4 Tac Tac Toe game.
 
