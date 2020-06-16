@@ -1,5 +1,5 @@
-# Generic Mini Max Algorith
-This project is to create a generic solution to apply minimax algorithm to range of different use-cases.
+# Generic Minimax Algorith
+This project is to create a generic solution to apply minimax algorithm to wider range of different use-cases.
 
 The idea is to have a class that could be used to iterate on a collection of states and evaluate all the possibilities of winning for two players.
 
