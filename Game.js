@@ -9,8 +9,8 @@ class Game{
         tie: 0
       };
 
-    constructor(){
-
+    constructor(maxDepth){
+        this._maxDepth = maxDepth;
     }
 
     onTrace = function(player, evaluate){
@@ -36,7 +36,7 @@ class Game{
 
     _minimax = function(player, level = 0) {
         let winner = this.getWinner();
-        if (winner !== null || level ==1) {
+        if (winner !== null || level ==this._maxDepth) {
             return { bestScore: winner, position: {}  };
         }
 

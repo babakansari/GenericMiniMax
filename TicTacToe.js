@@ -8,7 +8,7 @@ class TicTacToe {
 
   constructor(board){
     this._board = board;
-    this._game= new Game();
+    this._game= new Game(2);
     this._game.getWinner = () => this._checkWinner();
     this._game.onTrace = (player, evaluate) => this._checkBoard(player, evaluate);
   }
