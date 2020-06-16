@@ -8,7 +8,7 @@ class TicTacToe {
 
   constructor(board){
     this._board = board;
-    this._game= new Game(2);
+    this._game= new Game(4);
     this._game.getWinner = () => this._checkWinner();
     this._game.onTrace = (player, evaluate) => this._checkBoard(player, evaluate);
   }
@@ -39,8 +39,8 @@ class TicTacToe {
     if (equals4(this._board[0][0], this._board[1][1], this._board[2][2], this._board[3][3])) {
       winner = this._board[0][0];
     }
-    if (equals4(this._board[2][0], this._board[1][1], this._board[0][2], this._board[0][3])) {
-      winner = this._board[2][0];
+    if (equals4(this._board[3][0], this._board[2][1], this._board[1][2], this._board[0][3])) {
+      winner = this._board[3][0];
     }
   
     let openSpots = 0;
@@ -77,6 +77,9 @@ class TicTacToe {
 
   getTheBestMove = function(turn) {
     let position = this._game.play( turn==TicTacToe.ai ? Game.players.A : Game.players.B);
+    if(!position){
+      return TicTacToe.tie;
+    }
     this._board[position.i][position.j] = turn;
     let winner = this._checkWinner();
     if(winner == null){
